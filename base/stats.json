@@ -1,0 +1,138 @@
+{
+  "total_prompt_tokens": 523673,
+  "total_completion_tokens": 181801,
+  "total_cached_tokens": 252928,
+  "total_requests": 218,
+  "total_prefill_duration": 1542.8792087492002,
+  "total_generation_duration": 5381.80375641642,
+  "per_model": {
+    "Qwen3-Coder-Next-4bit": {
+      "prompt_tokens": 349866,
+      "completion_tokens": 57105,
+      "cached_tokens": 223232,
+      "requests": 84,
+      "prefill_duration": 895.2032502502752,
+      "generation_duration": 1333.4600521626937
+    },
+    "DeepSeek-R1-Distill-Llama-70B-4bit": {
+      "prompt_tokens": 1892,
+      "completion_tokens": 4344,
+      "cached_tokens": 0,
+      "requests": 4,
+      "prefill_duration": 49.2879491251515,
+      "generation_duration": 624.0669787498773
+    },
+    "Qwen3-VL-8B-Instruct-MLX-8bit": {
+      "prompt_tokens": 9735,
+      "completion_tokens": 3412,
+      "cached_tokens": 4864,
+      "requests": 7,
+      "prefill_duration": 22.25827879094868,
+      "generation_duration": 95.28070704205311
+    },
+    "Qwen3-VL-32B-Instruct-MLX-8bit": {
+      "prompt_tokens": 2443,
+      "completion_tokens": 1088,
+      "cached_tokens": 1024,
+      "requests": 4,
+      "prefill_duration": 41.3733138749958,
+      "generation_duration": 119.60178033297416
+    },
+    "Qwen3-VL-32B-Instruct-MLX-6bit": {
+      "prompt_tokens": 9641,
+      "completion_tokens": 802,
+      "cached_tokens": 5376,
+      "requests": 3,
+      "prefill_duration": 74.0603497090633,
+      "generation_duration": 75.67542316496838
+    },
+    "Qwen3.6-35B-A3B-4bit": {
+      "prompt_tokens": 2498,
+      "completion_tokens": 1128,
+      "cached_tokens": 0,
+      "requests": 3,
+      "prefill_duration": 10.244304708961863,
+      "generation_duration": 18.497821208962705
+    },
+    "Qwen3.6-35B-A3B-6bit": {
+      "prompt_tokens": 123562,
+      "completion_tokens": 44389,
+      "cached_tokens": 18432,
+      "requests": 71,
+      "prefill_duration": 264.6616530368974,
+      "generation_duration": 904.3497220469872
+    },
+    "Qwen3.6-35B-A3B-MTPLX-Optimized-Balance-FP16": {
+      "prompt_tokens": 349,
+      "completion_tokens": 7051,
+      "cached_tokens": 0,
+      "requests": 4,
+      "prefill_duration": 6.667170042986982,
+      "generation_duration": 134.5069194160169
+    },
+    "Qwen3.6-35B-A3B-MTPLX-Optimized-Speed-FP16": {
+      "prompt_tokens": 267,
+      "completion_tokens": 6144,
+      "cached_tokens": 0,
+      "requests": 3,
+      "prefill_duration": 2.307947958004661,
+      "generation_duration": 92.84636995897745
+    },
+    "Qwen3.6-35B-A3B-MTPLX-Optimized-Balance": {
+      "prompt_tokens": 101,
+      "completion_tokens": 3783,
+      "cached_tokens": 0,
+      "requests": 2,
+      "prefill_duration": 2.750319831975503,
+      "generation_duration": 75.00187079200987
+    },
+    "Qwen3-Coder-30B-A3B-Instruct-4bit": {
+      "prompt_tokens": 893,
+      "completion_tokens": 14476,
+      "cached_tokens": 0,
+      "requests": 12,
+      "prefill_duration": 21.85691346001113,
+      "generation_duration": 245.79099254196626
+    },
+    "GLM-4.7-Flash-4bit": {
+      "prompt_tokens": 145,
+      "completion_tokens": 2574,
+      "cached_tokens": 0,
+      "requests": 3,
+      "prefill_duration": 2.9672093330300413,
+      "generation_duration": 59.83967774998746
+    },
+    "Qwen3.6-35B-A3B-8bit": {
+      "prompt_tokens": 7213,
+      "completion_tokens": 11671,
+      "cached_tokens": 0,
+      "requests": 6,
+      "prefill_duration": 32.45093483297387,
+      "generation_duration": 247.39018225096515
+    },
+    "Qwen3.6-27B-6bit": {
+      "prompt_tokens": 1765,
+      "completion_tokens": 5958,
+      "cached_tokens": 0,
+      "requests": 3,
+      "prefill_duration": 23.2482621249801,
+      "generation_duration": 437.52030212499085
+    },
+    "Qwen3.6-27B-8bit": {
+      "prompt_tokens": 5541,
+      "completion_tokens": 7750,
+      "cached_tokens": 0,
+      "requests": 4,
+      "prefill_duration": 66.90763195898035,
+      "generation_duration": 704.8274144989846
+    },
+    "Qwen3.6-35B-A3B-MLX-8bit": {
+      "prompt_tokens": 7762,
+      "completion_tokens": 10126,
+      "cached_tokens": 0,
+      "requests": 5,
+      "prefill_duration": 26.63371970996377,
+      "generation_duration": 213.14754237400484
+    }
+  }
+}

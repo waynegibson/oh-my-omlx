@@ -1,0 +1,28 @@
+# macOS System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+.history/
+.ionide/
+
+# Claude
+! .claude/commands/
+! .claude/commands/**
+
+# oMLX
+base/cache
+base/logs
+base/models
+
+# Folder for temporary files
+tmp/
+.scratch/
+

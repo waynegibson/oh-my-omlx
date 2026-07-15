@@ -1,0 +1,9 @@
+#!/bin/sh
+BOOTSTRAP="$HOME/Library/Application Support/oMLX/base-path"
+if [ -r "$BOOTSTRAP" ]; then
+    IFS= read -r OMLX_BASE_PATH < "$BOOTSTRAP" || OMLX_BASE_PATH=""
+    if [ -n "$OMLX_BASE_PATH" ]; then
+        export OMLX_BASE_PATH
+    fi
+fi
+exec '/Applications/oMLX.app/Contents/MacOS/omlx-cli' "$@"
