@@ -26,10 +26,12 @@
           "specprefill_enabled": false,
           "dflash_enabled": false,
           "mtp_enabled": false,
-          "vlm_mtp_enabled": false
+          "vlm_mtp_enabled": true,
+          "vlm_mtp_draft_model": "Qwen3.6-35B-A3B-MTP-bf16"
         },
         "source_template": null,
-        "expose_as_model": false
+        "expose_as_model": false,
+        "updated_at": "2026-07-22T06:03:02.136240+00:00"
       },
       "coder": {
         "name": "coder",
@@ -55,7 +57,7 @@
           "specprefill_enabled": false,
           "dflash_enabled": false,
           "mtp_enabled": false,
-          "vlm_mtp_enabled": false,
+          "vlm_mtp_enabled": true,
           "guided_grammar_enabled": false,
           "turboquant_kv_bits": 4,
           "turboquant_skip_last": true,
@@ -65,11 +67,12 @@
           "dflash_in_memory_cache_max_entries": 4,
           "dflash_in_memory_cache_max_bytes": 8589934592,
           "dflash_ssd_cache": false,
-          "dflash_ssd_cache_max_bytes": 21474836480
+          "dflash_ssd_cache_max_bytes": 21474836480,
+          "vlm_mtp_draft_model": "Qwen3.6-35B-A3B-MTP-bf16"
         },
         "source_template": null,
         "expose_as_model": false,
-        "updated_at": "2026-07-16T03:27:12.130146+00:00"
+        "updated_at": "2026-07-22T06:03:02.142337+00:00"
       },
       "agentic": {
         "name": "agentic",
@@ -95,10 +98,12 @@
           "specprefill_enabled": false,
           "dflash_enabled": false,
           "mtp_enabled": false,
-          "vlm_mtp_enabled": false
+          "vlm_mtp_enabled": true,
+          "vlm_mtp_draft_model": "Qwen3.6-35B-A3B-MTP-bf16"
         },
         "source_template": null,
-        "expose_as_model": false
+        "expose_as_model": false,
+        "updated_at": "2026-07-22T06:03:02.146909+00:00"
       },
       "prose": {
         "name": "prose",
@@ -123,10 +128,12 @@
           "specprefill_enabled": false,
           "dflash_enabled": false,
           "mtp_enabled": false,
-          "vlm_mtp_enabled": false
+          "vlm_mtp_enabled": true,
+          "vlm_mtp_draft_model": "Qwen3.6-35B-A3B-MTP-bf16"
         },
         "source_template": null,
-        "expose_as_model": false
+        "expose_as_model": false,
+        "updated_at": "2026-07-22T06:03:02.151788+00:00"
       },
       "quiz": {
         "name": "quiz",
@@ -151,10 +158,12 @@
           "specprefill_enabled": false,
           "dflash_enabled": false,
           "mtp_enabled": false,
-          "vlm_mtp_enabled": false
+          "vlm_mtp_enabled": true,
+          "vlm_mtp_draft_model": "Qwen3.6-35B-A3B-MTP-bf16"
         },
         "source_template": null,
-        "expose_as_model": false
+        "expose_as_model": false,
+        "updated_at": "2026-07-22T06:03:02.156685+00:00"
       }
     },
     "Qwen3.6-35B-A3B-8bit": {
@@ -182,10 +191,12 @@
           "specprefill_enabled": false,
           "dflash_enabled": false,
           "mtp_enabled": false,
-          "vlm_mtp_enabled": false
+          "vlm_mtp_enabled": true,
+          "vlm_mtp_draft_model": "Qwen3.6-35B-A3B-MTP-bf16"
         },
         "source_template": null,
-        "expose_as_model": false
+        "expose_as_model": false,
+        "updated_at": "2026-07-22T06:03:02.164704+00:00"
       },
       "coder": {
         "name": "coder",
@@ -211,10 +222,12 @@
           "specprefill_enabled": false,
           "dflash_enabled": false,
           "mtp_enabled": false,
-          "vlm_mtp_enabled": false
+          "vlm_mtp_enabled": true,
+          "vlm_mtp_draft_model": "Qwen3.6-35B-A3B-MTP-bf16"
         },
         "source_template": null,
-        "expose_as_model": false
+        "expose_as_model": false,
+        "updated_at": "2026-07-22T06:03:02.169785+00:00"
       },
       "agentic": {
         "name": "agentic",
@@ -240,10 +253,12 @@
           "specprefill_enabled": false,
           "dflash_enabled": false,
           "mtp_enabled": false,
-          "vlm_mtp_enabled": false
+          "vlm_mtp_enabled": true,
+          "vlm_mtp_draft_model": "Qwen3.6-35B-A3B-MTP-bf16"
         },
         "source_template": null,
-        "expose_as_model": false
+        "expose_as_model": false,
+        "updated_at": "2026-07-22T06:03:02.174864+00:00"
       },
       "prose": {
         "name": "prose",
@@ -268,10 +283,12 @@
           "specprefill_enabled": false,
           "dflash_enabled": false,
           "mtp_enabled": false,
-          "vlm_mtp_enabled": false
+          "vlm_mtp_enabled": true,
+          "vlm_mtp_draft_model": "Qwen3.6-35B-A3B-MTP-bf16"
         },
         "source_template": null,
-        "expose_as_model": false
+        "expose_as_model": false,
+        "updated_at": "2026-07-22T06:03:02.179437+00:00"
       },
       "quiz": {
         "name": "quiz",
@@ -296,10 +313,12 @@
           "specprefill_enabled": false,
           "dflash_enabled": false,
           "mtp_enabled": false,
-          "vlm_mtp_enabled": false
+          "vlm_mtp_enabled": true,
+          "vlm_mtp_draft_model": "Qwen3.6-35B-A3B-MTP-bf16"
         },
         "source_template": null,
-        "expose_as_model": false
+        "expose_as_model": false,
+        "updated_at": "2026-07-22T06:03:02.184261+00:00"
       }
     }
   }
