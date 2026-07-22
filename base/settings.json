@@ -15,7 +15,7 @@
     ],
     "sse_keepalive_mode": "chunk",
     "auto_start_on_launch": true,
-    "burst_decode_mode": "balanced",
+    "burst_decode_mode": "aggressive",
     "preserve_mid_system_cache": true
   },
   "model": {
@@ -42,10 +42,10 @@
   },
   "cache": {
     "enabled": true,
-    "hot_cache_only": true,
+    "hot_cache_only": false,
     "ssd_cache_dir": null,
-    "ssd_cache_max_size": "auto",
-    "hot_cache_max_size": "8",
+    "ssd_cache_max_size": "64GB",
+    "hot_cache_max_size": "8GB",
     "initial_cache_blocks": 256
   },
   "auth": {
@@ -96,7 +96,7 @@
     "opencode_model": null,
     "openclaw_model": null,
     "hermes_model": null,
-    "pi_model": "Qwen3.6-35B-A3B-6bit",
+    "pi_model": "",
     "copilot_model": null,
     "openclaw_tools_profile": "coding",
     "markitdown_enabled": true,
@@ -109,6 +109,6 @@
     "language": "en"
   },
   "idle_timeout": {
-    "idle_timeout_seconds": 900
+    "idle_timeout_seconds": 3600
   }
 }
