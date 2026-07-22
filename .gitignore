@@ -21,6 +21,7 @@ Icon?
 base/cache
 base/logs
 base/models
+base/stats.json
 
 # Folder for temporary files
 tmp/
