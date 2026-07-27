@@ -3,7 +3,7 @@
   "models": {
     "Qwen3.6-35B-A3B-6bit": {
       "max_context_window": 65536,
-      "max_tokens": 16384,
+      "max_tokens": 32768,
       "temperature": 0.6,
       "top_p": 0.95,
       "top_k": 20,
@@ -41,7 +41,7 @@
     },
     "Qwen3.6-35B-A3B-8bit": {
       "max_context_window": 65536,
-      "max_tokens": 16384,
+      "max_tokens": 32768,
       "temperature": 0.6,
       "top_p": 0.95,
       "top_k": 20,
