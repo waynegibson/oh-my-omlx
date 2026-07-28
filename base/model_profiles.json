@@ -212,6 +212,7 @@
           "force_sampling": false,
           "specprefill_enabled": false,
           "max_context_window": 65536,
+          "maxTokens": 16384,
           "vlm_mtp_draft_model": "Qwen3.6-35B-A3B-MTP-bf16",
           "thinking_budget_tokens": 8192,
           "min_p": 0,
