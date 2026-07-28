@@ -49,7 +49,7 @@
     "initial_cache_blocks": 256
   },
   "auth": {
-    "api_key": "sk-omlx-zMYzqyi6EoJpejIwZkTPpRcQ",
+    "api_key": "local-bypass",
     "secret_key": "4019f6cffb5f0c5e04de303afaa34198f4d36e66727a9f8c2b2da655571ffffd",
     "skip_api_key_verification": true,
     "sub_keys": []
