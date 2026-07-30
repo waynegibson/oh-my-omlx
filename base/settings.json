@@ -38,7 +38,8 @@
   "scheduler": {
     "max_concurrent_requests": 2,
     "embedding_batch_size": 32,
-    "chunked_prefill": true
+    "chunked_prefill": true,
+    "prefill_priority": "context"
   },
   "cache": {
     "enabled": true,
