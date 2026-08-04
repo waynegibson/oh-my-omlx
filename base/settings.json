@@ -28,8 +28,8 @@
   },
   "memory": {
     "prefill_memory_guard": true,
-    "memory_guard_tier": "balanced",
-    "memory_guard_custom_ceiling_gb": 0.0,
+    "memory_guard_tier": "custom",
+    "memory_guard_custom_ceiling_gb": 56.0,
     "soft_threshold": 0.85,
     "hard_threshold": 0.95,
     "prefill_safe_zone_ratio": 0.8,
@@ -46,7 +46,7 @@
     "hot_cache_only": false,
     "ssd_cache_dir": null,
     "ssd_cache_max_size": "64GB",
-    "hot_cache_max_size": "8GB",
+    "hot_cache_max_size": "4GB",
     "initial_cache_blocks": 256
   },
   "auth": {
@@ -85,8 +85,6 @@
     "retention_days": 7
   },
   "claude_code": {
-    "context_scaling_enabled": false,
-    "target_context_size": 200000,
     "mode": "local",
     "opus_model": "",
     "sonnet_model": null,
