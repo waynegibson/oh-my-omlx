@@ -18,7 +18,7 @@
       "reasoning_parser": "auto",
       "guided_grammar_enabled": false,
       "turboquant_kv_enabled": true,
-      "turboquant_kv_bits": 6,
+      "turboquant_kv_bits": 8,
       "turboquant_skip_last": true,
       "specprefill_enabled": false,
       "specprefill_keep_pct": 0.2,
