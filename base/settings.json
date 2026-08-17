@@ -16,20 +16,21 @@
     "sse_keepalive_mode": "chunk",
     "auto_start_on_launch": true,
     "burst_decode_mode": "aggressive",
-    "preserve_mid_system_cache": true
+    "preserve_mid_system_cache": true,
+    "distributed_inference_enabled": false
   },
   "model": {
     "model_dirs": [
-      "/Volumes/SSDSCX_DATA/workspace/applications/oh-my-omlx/base/models"
+      "/Volumes/SSDSCX_DATA/workspace/applications/omlx-config/base/models"
     ],
-    "model_dir": "/Volumes/SSDSCX_DATA/workspace/applications/oh-my-omlx/base/models",
+    "model_dir": "/Volumes/SSDSCX_DATA/workspace/applications/omlx-config/base/models",
     "model_fallback": false,
     "hide_helper_models": false
   },
   "memory": {
     "prefill_memory_guard": true,
     "memory_guard_tier": "custom",
-    "memory_guard_custom_ceiling_gb": 56.0,
+    "memory_guard_custom_ceiling_gb": 52.0,
     "soft_threshold": 0.85,
     "hard_threshold": 0.95,
     "prefill_safe_zone_ratio": 0.8,
@@ -39,11 +40,16 @@
     "max_concurrent_requests": 2,
     "embedding_batch_size": 32,
     "chunked_prefill": true,
-    "prefill_priority": "context"
+    "prefill_priority": "context",
+    "decode_fairness": true
   },
   "cache": {
     "enabled": true,
     "hot_cache_only": false,
+    "gdn_ssd_split_enabled": false,
+    "gdn_snapshot_storage": "embedded",
+    "gdn_ssd_pending_max_size": "512MB",
+    "gdn_sidecar_state_dtype": "fp32",
     "ssd_cache_dir": null,
     "ssd_cache_max_size": "64GB",
     "hot_cache_max_size": "4GB",
@@ -56,7 +62,8 @@
     "sub_keys": []
   },
   "mcp": {
-    "config_path": null
+    "config_path": null,
+    "expose_tools": true
   },
   "huggingface": {
     "endpoint": "",
@@ -102,7 +109,15 @@
     "markitdown_expose_model": false,
     "markitdown_max_file_size_mb": 25,
     "markitdown_max_files_per_request": 5,
-    "markitdown_pdf_processing_engine": "markitdown"
+    "markitdown_pdf_processing_engine": "markitdown",
+    "web_search_provider": "ddgs",
+    "web_search_brave_api_key": "",
+    "web_search_searxng_url": "",
+    "web_search_ddgs_backends": "",
+    "web_search_max_results": 3,
+    "web_search_content_mode": "snippet",
+    "web_search_content_truncate": true,
+    "web_search_content_max_chars": 20000
   },
   "ui": {
     "language": "en"
