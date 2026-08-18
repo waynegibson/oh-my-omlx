@@ -4,9 +4,7 @@
     "host": "127.0.0.1",
     "port": 8055,
     "log_level": "info",
-    "cors_origins": [
-      "*"
-    ],
+    "cors_origins": ["*"],
     "server_aliases": [
       "localhost",
       "127.0.0.1",
@@ -37,7 +35,7 @@
     "prefill_min_chunk_tokens": 32
   },
   "scheduler": {
-    "max_concurrent_requests": 2,
+    "max_concurrent_requests": 1,
     "embedding_batch_size": 32,
     "chunked_prefill": true,
     "prefill_priority": "context",
@@ -46,10 +44,10 @@
   "cache": {
     "enabled": true,
     "hot_cache_only": false,
-    "gdn_ssd_split_enabled": false,
-    "gdn_snapshot_storage": "embedded",
+    "gdn_ssd_split_enabled": true,
+    "gdn_snapshot_storage": "auto",
     "gdn_ssd_pending_max_size": "512MB",
-    "gdn_sidecar_state_dtype": "fp32",
+    "gdn_sidecar_state_dtype": "rht-int16",
     "ssd_cache_dir": null,
     "ssd_cache_max_size": "64GB",
     "hot_cache_max_size": "4GB",
@@ -93,9 +91,9 @@
   },
   "claude_code": {
     "mode": "local",
-    "opus_model": "",
-    "sonnet_model": null,
-    "haiku_model": null
+    "opus_model": "Qwen3.6-35B-A3B-oQ8e-fp16-mtp",
+    "sonnet_model": "Qwen3.6-35B-A3B-oQ8e-fp16-mtp",
+    "haiku_model": "Qwen3.6-35B-A3B-oQ6e-fp16-mtp"
   },
   "integrations": {
     "codex_model": null,

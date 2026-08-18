@@ -23,6 +23,7 @@ base/logs
 base/models
 base/stats.json
 base/quant-sources
+base/bin/omlx-cluster-python
 
 # Folder for temporary files
 tmp/
