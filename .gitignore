@@ -27,5 +27,6 @@ base/bin/omlx-cluster-python
 
 # Folder for temporary files
 tmp/
+.tmp/
 .scratch/
 
