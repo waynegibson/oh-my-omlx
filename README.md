@@ -1,16 +1,16 @@
 # oMLX — Local LLM Inference Server
 
-oMLX-based local inference server running Qwen 3.6 models on Apple Silicon (M1 Max / 64 GB). Replaces cloud APIs with self-hosted MLX-quantized models.
+oMLX-based local inference server running Qwen 3.6 and 3.8 models on Apple Silicon (M1 Max / 64 GB). Replaces cloud APIs with self-hosted MLX-quantized models.
 
 ## Models
 
-Only the three `spacecomx/` quantized models are served. All are VLM-capable (text + image) with native MTP speculative decoding.
+- Only the three `spacecomx/` quantized models are served. All are VLM-capable (text + image) with native MTP speculative decoding.
 
-| Model                             | Size  | Weights     | KV cache         | Context | Active profile           |
-| --------------------------------- | ----- | ----------- | ---------------- | ------- | ------------------------ |
-| **Qwen3.6-27B-oQ8e-fp16-mtp**     | 29 GB | 8-bit dense | fp16             | 131,072 | `coder` (server default) |
-| **Qwen3.6-35B-A3B-oQ6e-fp16-mtp** | 29 GB | 6-bit MoE   | fp16             | 131,072 | `general`                |
-| **Qwen3.6-35B-A3B-oQ8e-fp16-mtp** | 37 GB | 8-bit MoE   | TurboQuant 8-bit | 131,072 | `coder`                  |
+| Model                             | Size  | Weights     | KV cache  | Context | Active profile |
+| --------------------------------- | ----- | ----------- | --------- | ------- | -------------- |
+| **Qwen3.6-35B-A3B-oQ8e-fp16-mtp** | 37 GB | 8-bit MoE   | fp16      | 131,072 | `general`      |
+| **Qwen3.8-27B-oQ8e-fp16-mtp**     | 29 GB | 8-bit dense | fp16      | 131,072 | `general`      |
+| **Qwen3.8-27B-oQ6e-fp16-mtp**     | 29 GB | 6-bit MoE   | fp16      | 131,072 | `general`      |
 
 Weight quantization (`oQ8e`/`oQ6e`, baked into the checkpoint) and KV-cache quantization (`turboquant_kv_bits`, a runtime setting) are independent. `turboquant_kv_enabled: false` means the cache is kept at **fp16**, not that there is no cache.
 
@@ -18,19 +18,11 @@ The unquantized fp16 sources (`Qwen3.6-27B` 52 GB, `Qwen3.6-35B-A3B` 67 GB) were
 
 ## Performance
 
-Measured on M1 Max / 64 GB, one model resident at a time, 300-token generations and a 7.5k-token uncached prefill. Median of 3 decode runs.
+Benchmarks for the current model set are pending re-measurement.
 
-| Model                | Load   | Decode         | Prefill       | Active params/token |
-| -------------------- | ------ | -------------- | ------------- | ------------------- |
-| Qwen3.6-27B-oQ8e     | 13.1 s | **15.4 tok/s** | **144 tok/s** | 27 B (dense)        |
-| Qwen3.6-35B-A3B-oQ6e | 15.5 s | **55.1 tok/s** | **909 tok/s** | 3 B (MoE)           |
-| Qwen3.6-35B-A3B-oQ8e | 22.2 s | **45.8 tok/s** | **925 tok/s** | 3 B (MoE)           |
+**The dense 27B is significantly slower to decode and prefill than either MoE**, despite having fewer total parameters. This is arithmetic, not misconfiguration: the 27B activates all 27 B parameters per token while the A3B MoE activates ~3 B.
 
-**The dense 27B is 3.6× slower to decode and 6.3× slower to prefill than either MoE**, despite having fewer total parameters. This is arithmetic, not misconfiguration: the 27B activates all 27 B parameters per token while the A3B MoE activates ~3 B. The 27B run measures 7.8 TFLOP/s effective, already near the M1 Max ceiling.
-
-Practical consequence: a cold 50k-token prefill costs the 27B roughly 6 minutes versus under a minute on the MoE models. Prefix caching hides most of this within a session, but **the MoE models are the better choice for long-context agent work** — they are faster on both axes _and_ their KV cache is 3.2× cheaper per token.
-
-TurboQuant 8-bit KV costs no measurable throughput: the oQ8e benched 44–48 tok/s with it enabled, matching its fp16 sibling's range.
+Practical consequence: a cold 50k-token prefill costs the 27B roughly 6 minutes versus under a minute on the MoE models. Prefix caching hides most of this within a session, but **the MoE models are the better choice for long-context agent work** — they are faster on both axes _and_ their KV cache is ~3× cheaper per token.
 
 ## Memory model
 
@@ -52,22 +44,17 @@ The prefill guard computes `hard_limit = min(static, dynamic, metal_cap)`, then 
 
 These are hybrid-attention models — only full-attention layers grow a KV cache; linear-attention layers hold a fixed-size recurrent state.
 
-| Model        | Layers | Full-attn | KV heads | KV/token       | Budget    | Need @ 131k+16k | Margin |
-| ------------ | ------ | --------- | -------- | -------------- | --------- | --------------- | ------ |
-| 27B-oQ8e     | 64     | 16        | 4        | 67 KB (fp16)   | 11.55 GiB | 9.41 GiB        | +2.14  |
-| 35B-A3B-oQ6e | 40     | 10        | 2        | 21 KB (fp16)   | 11.30 GiB | 2.94 GiB        | +8.36  |
-| 35B-A3B-oQ8e | 40     | 10        | 2        | 11.5 KB (tq8b) | 3.17 GiB  | 1.62 GiB        | +1.55  |
+| Model        | Layers | Full-attn | KV heads | KV/token     | Budget   | Need @ 131k+16k | Margin |
+| ------------ | ------ | --------- | -------- | ------------ | -------- | --------------- | ------ |
+| 35B-A3B-oQ8e | 40     | 10        | 2        | 21 KB (fp16) | 15.0 GiB | 2.94 GiB        | +12.1  |
+| 27B-oQ8e     | 64     | 16        | 4        | 67 KB (fp16) | 23.0 GiB | 9.41 GiB        | +13.6  |
+| 27B-oQ6e     | 40     | 10        | 2        | 21 KB (fp16) | 23.0 GiB | 2.94 GiB        | +20.1  |
 
-`max_context_window` is the **prompt** cap, so the KV budget must cover `context + max_tokens`. The oQ8e is the heaviest model (37 GB of weights), leaving it the least room for cache — at fp16 it would need 2.94 GiB against a 3.17 GiB budget, a 7% margin. TurboQuant 8-bit KV restores a comfortable +1.55 GiB at no throughput cost.
-
-`hot_cache_max_size` is charged against the **same** ceiling as the KV cache, so it directly trades off against usable context. It is set to `4GB`.
-
-> `hot_cache_max_size` goes through `parse_size()`: a bare `"8"` means 8 **bytes**, not 8 GB. Always include the unit.
+`max_context_window` is the **prompt** cap, so the KV budget must cover `context + max_tokens`. All three models now use fp16 KV cache (`turboquant_kv_enabled: false`). The 35B-A3B-oQ8e has the smallest weight budget (37 GB), leaving ~15 GiB for KV cache — still ample at fp16.
 
 ## Model profiles
 
-Four profiles per model. Sampling follows Qwen guidance: thinking mode `temp 0.6 / top_p 0.95`, non-thinking `temp 0.7 / top_p 0.8`, `top_k 20`, `min_p 0` throughout.
-
+Four profiles per model. Qwen 3.6 base temp is 0.6, Qwen 3.8 base temp is 0.7. Thinking mode `top_p 0.95`, non-thinking `top_p 0.8`, `top_k 20`, `min_p 0` throughout.
 | Profile   | Context | Max output | Temp | top_p | Thinking       | Tool results | Use case                                                     |
 | --------- | ------- | ---------- | ---- | ----- | -------------- | ------------ | ------------------------------------------------------------ |
 | `coder`   | 131,072 | 16,384     | 0.6  | 0.95  | on (8K budget) | 16,384       | Python/ML notebooks, TS/SQL, code review, agentic tool loops |
@@ -128,8 +115,7 @@ Profiles can only be managed for models that exist in the registry — a stale p
 ## Architecture
 
 - **Decoding**: native MTP on all models; DFlash and SpecPrefill disabled
-- **KV cache**: fp16 on the 27B and oQ6e, TurboQuant 8-bit (`skip_last`) on the oQ8e
-- **Caching**: 4 GB hot cache, 64 GB SSD tier available, `preserve_mid_system_cache` on
+- **KV cache**: fp16 on all models
 - **Burst decode**: aggressive, with `idle_timeout_seconds: 3600`
 - **Scheduler**: 2 concurrent requests, chunked prefill (priority: context)
 - **Memory guard**: `custom` tier, 56 GB ceiling
@@ -142,7 +128,7 @@ base/
   cache/                — KV cache blocks (gitignored)
   logs/                 — Runtime logs (gitignored)
   models/               — Served weights, ~95 GB (gitignored)
-    spacecomx/          — 27B-oQ8e, 35B-oQ6e, 35B-oQ8e
+    spacecomx/          — 35B-A3B-oQ8e, 27B-oQ8e, 27B-oQ6e
     .oqe_imatrix/       — oQ calibration matrices, keyed to the fp16 sources
   quant-sources/        — Unquantized fp16 inputs, ~119 GB (gitignored, never served)
   model_profiles.json   — Per-model profile definitions
