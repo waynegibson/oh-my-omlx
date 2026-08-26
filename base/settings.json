@@ -53,6 +53,8 @@
     "ssd_cache_dir": null,
     "ssd_cache_max_size": "64GB",
     "hot_cache_max_size": "4GB",
+    "hot_cache_write_through": false,
+    "ane_compile_cache": false,
     "initial_cache_blocks": 256
   },
   "auth": {
@@ -93,9 +95,9 @@
   },
   "claude_code": {
     "mode": "local",
-    "opus_model": "Qwen3.6-35B-A3B-oQ8e-fp16-mtp",
-    "sonnet_model": "Qwen3.6-35B-A3B-oQ8e-fp16-mtp",
-    "haiku_model": "Qwen3.6-35B-A3B-oQ6e-fp16-mtp"
+    "opus_model": "Qwen3.8-27B-oQ8e-fp16-mtp",
+    "sonnet_model": "Qwen3.8-27B-oQ6e-fp16-mtp",
+    "haiku_model": "Qwen3.6-35B-A3B-oQ8e-fp16-mtp"
   },
   "integrations": {
     "codex_model": null,
