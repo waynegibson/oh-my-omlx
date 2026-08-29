@@ -6,11 +6,11 @@ oMLX-based local inference server running Qwen 3.6 and 3.8 models on Apple Silic
 
 - Only the three `spacecomx/` quantized models are served. All are VLM-capable (text + image) with native MTP speculative decoding.
 
-| Model                             | Size  | Weights     | KV cache  | Context | Active profile |
-| --------------------------------- | ----- | ----------- | --------- | ------- | -------------- |
-| **Qwen3.6-35B-A3B-oQ8e-fp16-mtp** | 37 GB | 8-bit MoE   | fp16      | 131,072 | `general`      |
-| **Qwen3.8-27B-oQ8e-fp16-mtp**     | 29 GB | 8-bit dense | fp16      | 131,072 | `general`      |
-| **Qwen3.8-27B-oQ6e-fp16-mtp**     | 29 GB | 6-bit MoE   | fp16      | 131,072 | `general`      |
+| Model                             | Size  | Weights     | KV cache | Context | Active profile |
+| --------------------------------- | ----- | ----------- | -------- | ------- | -------------- |
+| **Qwen3.6-35B-A3B-oQ8e-fp16-mtp** | 37 GB | 8-bit MoE   | fp16     | 131,072 | `general`      |
+| **Qwen3.8-27B-oQ8e-fp16-mtp**     | 29 GB | 8-bit dense | fp16     | 131,072 | `general`      |
+| **Qwen3.8-27B-oQ6e-fp16-mtp**     | 29 GB | 6-bit MoE   | fp16     | 131,072 | `general`      |
 
 Weight quantization (`oQ8e`/`oQ6e`, baked into the checkpoint) and KV-cache quantization (`turboquant_kv_bits`, a runtime setting) are independent. `turboquant_kv_enabled: false` means the cache is kept at **fp16**, not that there is no cache.
 
@@ -55,12 +55,12 @@ These are hybrid-attention models — only full-attention layers grow a KV cache
 ## Model profiles
 
 Four profiles per model. Qwen 3.6 base temp is 0.6, Qwen 3.8 base temp is 0.7. Thinking mode `top_p 0.95`, non-thinking `top_p 0.8`, `top_k 20`, `min_p 0` throughout.
-| Profile   | Context | Max output | Temp | top_p | Thinking       | Tool results | Use case                                                     |
+| Profile | Context | Max output | Temp | top_p | Thinking | Tool results | Use case |
 | --------- | ------- | ---------- | ---- | ----- | -------------- | ------------ | ------------------------------------------------------------ |
-| `coder`   | 131,072 | 16,384     | 0.6  | 0.95  | on (8K budget) | 16,384       | Python/ML notebooks, TS/SQL, code review, agentic tool loops |
-| `general` | 131,072 | 16,384     | 0.7  | 0.95  | on (4K budget) | 8,192        | Balanced default for Q&A and analysis                        |
-| `prose`   | 65,536  | 8,192      | 0.7  | 0.80  | off            | 0            | Documents, README, business-reader observations              |
-| `quiz`    | 32,768  | 4,096      | 0.0  | 0.90  | off            | 0            | Rigid-template ML quiz/exam output, deterministic            |
+| `coder` | 131,072 | 16,384 | 0.6 | 0.95 | on (8K budget) | 16,384 | Python/ML notebooks, TS/SQL, code review, agentic tool loops |
+| `general` | 131,072 | 16,384 | 0.7 | 0.95 | on (4K budget) | 8,192 | Balanced default for Q&A and analysis |
+| `prose` | 65,536 | 8,192 | 0.7 | 0.80 | off | 0 | Documents, README, business-reader observations |
+| `quiz` | 32,768 | 4,096 | 0.0 | 0.90 | off | 0 | Rigid-template ML quiz/exam output, deterministic |
 
 `quiz` keeps thinking **off** deliberately — Qwen warns that greedy decoding combined with thinking mode causes endless repetition, so determinism and thinking are mutually exclusive here.
 
@@ -152,3 +152,57 @@ base/
 Integration model slots (Claude Code, Codex, OpenCode, OpenClaw, Hermes, Pi, Copilot) exist in `settings.json` but are currently unset — clients select models by id over the OpenAI-compatible API. The `oh-my-pi` client is configured in `oh-my-pi/base/agent/models.json`; keep its `contextWindow` / `maxTokens` in step with the profiles above, or the client will pace its context against a budget the server will not honour.
 
 **Markitdown**: enabled — PDF/file processing (25 MB max, 5 files per request).
+
+## VS Code Custom Local Models
+
+With authentication:
+
+```json
+[
+  {
+    "name": "oMLX",
+    "vendor": "customendpoint",
+    "apiKey": "${input:omlxApiKey}",
+    "apiType": "chat-completions",
+    "models": [
+      {
+        "id": "Qwen3.8-27B-oQ8e-fp16-mtp",
+        "name": "Qwen3.8-27B",
+        "url": "http://127.0.0.1:8055/v1/chat/completions",
+        "apiType": "chat-completions",
+        "toolCalling": true,
+        "vision": true,
+        "contextWindow": 147456,
+        "maxInputTokens": 131072,
+        "maxOutputTokens": 16384,
+        "requestHeaders": { "Authorization": "Bearer ${apiKey}" }
+      }
+    ]
+  }
+]
+```
+
+Without authentication:
+
+```json
+[
+  {
+    "name": "oMLX",
+    "vendor": "customendpoint",
+    "apiType": "chat-completions",
+    "models": [
+      {
+        "id": "Qwen3.8-27B-oQ8e-fp16-mtp",
+        "name": "Qwen3.8-27B",
+        "url": "http://127.0.0.1:8055/v1/chat/completions",
+        "apiType": "chat-completions",
+        "toolCalling": true,
+        "vision": true,
+        "contextWindow": 147456,
+        "maxInputTokens": 131072,
+        "maxOutputTokens": 16384
+      }
+    ]
+  }
+]
+```

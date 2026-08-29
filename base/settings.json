@@ -17,7 +17,8 @@
     "auto_start_on_launch": true,
     "burst_decode_mode": "aggressive",
     "preserve_mid_system_cache": true,
-    "distributed_inference_enabled": false
+    "distributed_inference_enabled": false,
+    "max_audio_upload_size": "100MB"
   },
   "model": {
     "model_dirs": [
