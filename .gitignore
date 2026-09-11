@@ -22,6 +22,8 @@ base/cache
 base/logs
 base/models
 base/stats.json
+base/usage.sqlite3*
+base/cluster/
 base/quant-sources
 base/bin/omlx-cluster-python
 
