@@ -22,7 +22,8 @@
   },
   "model": {
     "model_dirs": [
-      "/Volumes/SSDSCX_DATA/workspace/applications/omlx-config/base/models"
+      "/Volumes/SSDSCX_DATA/workspace/applications/omlx-config/base/models",
+      "/Volumes/SSDSCX_DATA/LLM_SSD/models/omlx"
     ],
     "model_dir": "/Volumes/SSDSCX_DATA/workspace/applications/omlx-config/base/models",
     "model_fallback": false,
@@ -124,6 +125,9 @@
   },
   "ui": {
     "language": "en"
+  },
+  "usage": {
+    "usage_history": true
   },
   "idle_timeout": {
     "idle_timeout_seconds": 3600
