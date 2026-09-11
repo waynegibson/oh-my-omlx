@@ -166,8 +166,11 @@ base/
 | Variable             | Effect                                                            |
 | -------------------- | ----------------------------------------------------------------- |
 | `OMLX_API_KEY`       | Overrides `auth.api_key` (configured: `local-bypass`, unverified) |
+| `OMLX_SECRET_KEY`    | Overrides `auth.secret_key` (signs admin session cookies); set via `~/Library/LaunchAgents/com.spacecomx.omlx-env.plist` so the menubar app inherits it |
 | `OMLX_USAGE_HISTORY` | Overrides `usage.usage_history`                                   |
 | `OMLX_BASE_PATH`     | Overrides the base directory (set by `bin/omlx` from the bootstrap file) |
+
+`auth.api_key` and `auth.secret_key` are stripped from `base/settings.json` on commit by a git clean filter (`.gitattributes` → `scripts/redact-settings.py`); the working copy keeps them and the server regenerates `secret_key` when it is null.
 
 ## Server Aliases
 

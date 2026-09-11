@@ -10,6 +10,17 @@ This repository maintains configuration, a launcher, and operational documentati
 - For configuration schema or admin API work, verify version-dependent behavior against the installed application or current upstream sources.
 - For performance investigations, verify model identities, hardware assumptions, and measurements before applying recommendations.
 
+## Repository setup
+
+`base/settings.json` is committed through a git clean filter that nulls `auth.api_key` and `auth.secret_key`. Filter drivers are per-clone, so run once after cloning (and check with `git config --get filter.redact-secrets.clean` before committing that file):
+
+```sh
+git config filter.redact-secrets.clean 'python3 scripts/redact-settings.py'
+git config filter.redact-secrets.required true
+```
+
+Never print `auth.secret_key` or the `OMLX_SECRET_KEY` value into diagnostics or transcripts.
+
 ## Configuration changes
 
 1. Inspect `git status --short` and the relevant diff before editing. Preserve pre-existing changes and distinguish them from the task's changes.
