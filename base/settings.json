@@ -27,7 +27,8 @@
   },
   "model": {
     "model_dirs": [
-      "/Volumes/SSDSCX_DATA/workspace/applications/omlx-config/base/models"
+      "/Volumes/SSDSCX_DATA/workspace/applications/omlx-config/base/models",
+      "/Volumes/SSDSCX_DATA/workspace/applications/omlx-config/base/quant-sources"
     ],
     "model_dir": "/Volumes/SSDSCX_DATA/workspace/applications/omlx-config/base/models",
     "model_fallback": false,

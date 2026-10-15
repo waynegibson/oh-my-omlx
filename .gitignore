@@ -25,6 +25,8 @@ base/stats.json
 base/usage.sqlite3*
 base/cluster/
 base/quant-sources
+base/deprecated-models
+base/hf_download_tasks.json
 base/bin/omlx-cluster-python
 
 # Folder for temporary files
